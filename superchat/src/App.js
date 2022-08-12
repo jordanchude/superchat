@@ -1,17 +1,20 @@
-import React from 'react'
 import './App.css';
+import Chatroom from './components/Chat/Chatroom';
+import SignIn from './components/Welcome/SignIn';
 
 // environment variables
-require('dotenv').config();
+// require('dotenv').config();
+// require('dotenv-webpack').config();
 
 // firebase
-import firebase from 'firebase/app'
+import firebase from 'firebase/compat/app'
 import 'firebase/firestore';
-import 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 
 // hooks
-import { useAuthState } from 'react-firebase-hooks'
-import { useCollectionData } from 'react-firebase-hooks/firestore'
+import { useAuthState } from 'react-firebase-hooks/auth'
+// import { SignInMethod } from 'firebase/auth';
+// import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 // identify project
 firebase.initializeApp({
@@ -25,15 +28,25 @@ firebase.initializeApp({
 })
 
 // references to auth and firebase sdks
-const auth = firebase.auth();
-const firestore = firebase.firestore();
+// const auth = firebase.auth();
+// const firestore = firebase.firestore();
 
 function App() {
+
+// signed, user is an object
+// signed out, user is null
+  const auth = getAuth(firebase);
+  const [user] = useAuthState(auth);
+
   return (
     <div className="App">
       <header className="App-header">
         
       </header>
+
+      <section>
+        {user ? <Chatroom/> : <SignIn />}
+      </section>
     </div>
   );
 }
