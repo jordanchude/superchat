@@ -1,8 +1,11 @@
 import React from 'react'
+import './Header.css'
 
 const Header = () => {
   return (
-    <header>Superchat</header>
+    <div className='header'>
+      <header>Superchat</header>
+    </div>
   )
 }
 

@@ -1,0 +1,8 @@
+body {
+    margin: 0;
+}
+
+.header {
+    border-bottom: 3px solid black;
+    padding: 50px;
+}
