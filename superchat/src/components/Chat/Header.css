@@ -5,4 +5,10 @@ body {
 .header {
     border-bottom: 3px solid black;
     padding: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.signout-button {
+    text-align: left;
 }
