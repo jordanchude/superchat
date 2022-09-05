@@ -1,5 +1,5 @@
 import './App.css';
-// import Chatroom from './components/Chat/Chatroom';
+import Chatroom from './components/Chat/Chatroom';
 // import SignIn from './components/Welcome/SignIn';
 import Header from './components/Chat/Header';
 
@@ -48,6 +48,7 @@ function App() {
 
       <section>
         {/* {user ? <Chatroom/> : <SignIn />} */}
+        < Chatroom />
       </section>
     </div>
   );
