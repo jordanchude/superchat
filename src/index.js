@@ -19,12 +19,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-const db = app.firestore();
-
-db.collection("test").add({
-  name: "test",
-  value: "test value"
-})
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
