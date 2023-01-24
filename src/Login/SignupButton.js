@@ -1,9 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
-function SignupButton(props) {
+const auth = getAuth;
+
+function SignupButton({email, password}) {
+    const [error, setError] = useState(null);
+    
+    const signIn = async (e) => {
+        e.preventDefault();
+
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+        } catch (err) {
+            setError(err.message)
+        }
+    }
+
     return (
         <div>
-            <button>Sign In</button>
+            <button type="submit" onClick={signIn}>Sign In</button>
         </div>
     );
 }
