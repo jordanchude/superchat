@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
-const auth = getAuth;
+const auth = getAuth();
 
 function SignupButton({email, password}) {
     const [error, setError] = useState(null);
