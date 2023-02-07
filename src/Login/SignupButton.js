@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-// import { firebaseConfig } from '../index';
 import { initializeApp } from 'firebase/app';
 
 const firebaseConfig = {
@@ -16,7 +15,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 
-function SignupButton({email, password}) {
+function SignupButton({email, password, onUserChange}) {
     const [error, setError] = useState(null);
     const [user, setUser] = useState(null);
     
@@ -26,6 +25,7 @@ function SignupButton({email, password}) {
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             setUser(userCredential.user);
+            onUserChange(userCredential.user)
         } catch (err) {
             setError(err.message)
         }

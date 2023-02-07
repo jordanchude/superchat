@@ -4,6 +4,7 @@ import SignupButton from './SignupButton';
 function Login(props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [user, setUser] = useState(null);
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -13,13 +14,20 @@ function Login(props) {
         setPassword(e.target.value);
     }
 
+    const handleUserChange = (user) => {
+        setUser(user);
+    }
+
     return (
         <div className="login">
-            <form>
-                <input type="email" placeholder="email" onChange={handleEmailChange}/>
-                <input type="password" placeholder="password" onChange={handlePasswordChange}/>
-                <SignupButton email={email} password={password}/>
-            </form>
+            {!user && (
+                <form>
+                    <input type="email" placeholder="email" onChange={handleEmailChange}/>
+                    <input type="password" placeholder="password" onChange={handlePasswordChange} onUserChange={handleUserChange}/>
+                </form>
+            )}
+
+            <SignupButton email={email} password={password} onUserChange={handleUserChange}/>
         </div>
     );
 }
