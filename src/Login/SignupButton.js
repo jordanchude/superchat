@@ -32,7 +32,15 @@ function SignupButton({email, password, onUserChange}) {
     }
 
     const signOut = async (e) => {
-        
+        e.preventDefault();
+
+        try {
+            await auth.signOut()
+            setUser(null);
+            onUserChange(null);
+        } catch(err) {
+            setError(err.message);
+        }
     }
 
     return (
