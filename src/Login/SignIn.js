@@ -15,9 +15,23 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 
-function SignupButton({email, password, onUserChange}) {
+function SignIn() {
     const [error, setError] = useState(null);
     const [user, setUser] = useState(null);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value);
+    }
+
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value);
+    }
+
+    const handleUserChange = (user) => {
+        setUser(user);
+    }
     
     const signIn = async (e) => {
         e.preventDefault();
@@ -25,7 +39,6 @@ function SignupButton({email, password, onUserChange}) {
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             setUser(userCredential.user);
-            onUserChange(userCredential.user)
         } catch (err) {
             setError(err.message)
         }
@@ -37,9 +50,14 @@ function SignupButton({email, password, onUserChange}) {
         try {
             await auth.signOut()
             setUser(null);
-            onUserChange(null);
         } catch(err) {
             setError(err.message);
+        }
+    }
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            signIn(e);
         }
     }
 
@@ -50,12 +68,14 @@ function SignupButton({email, password, onUserChange}) {
                 <button type="submit" onClick={signOut}>Sign Out</button>
             </div>
         ) : (
-            <div>
+            <form onKeyDown={handleKeyDown}>
+                <input type="email" placeholder="email" onChange={handleEmailChange}/>
+                <input type="password" placeholder="password" onChange={handlePasswordChange} onUserChange={handleUserChange}/>
                 <button type="submit" onClick={signIn}>Sign In</button>
-            </div>
+            </form>
         )}
         </div>
     );
 }
 
-export default SignupButton;
+export default SignIn;
