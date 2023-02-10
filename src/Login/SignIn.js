@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
+import { GoogleAuthProvider } from 'firebase/auth';
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -44,6 +45,16 @@ function SignIn() {
         }
     }
 
+    const signInWithGoogle = async () => {
+        try {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            const userCredential = await firebase.auth().signInWithPopup(provider);
+            setUser(userCredential.user);
+        } catch (err) {
+            setError(err.message);
+        }
+    }
+
     const signOut = async (e) => {
         e.preventDefault();
 
@@ -68,11 +79,17 @@ function SignIn() {
                 <button type="submit" onClick={signOut}>Sign Out</button>
             </div>
         ) : (
-            <form onKeyDown={handleKeyDown}>
-                <input type="email" placeholder="email" onChange={handleEmailChange}/>
-                <input type="password" placeholder="password" onChange={handlePasswordChange} onUserChange={handleUserChange}/>
-                <button type="submit" onClick={signIn}>Sign In</button>
-            </form>
+            <div>
+                <form onKeyDown={handleKeyDown}>
+                    <input type="email" placeholder="email" onChange={handleEmailChange}/>
+                    <input type="password" placeholder="password" onChange={handlePasswordChange} onUserChange={handleUserChange}/>
+                    <button type="submit" onClick={signIn}>Sign In</button>
+                </form>
+
+                <div> 
+                    
+                </div>
+            </div>
         )}
         </div>
     );
