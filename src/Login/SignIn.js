@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
-import { GoogleAuthProvider } from 'firebase/auth';
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -45,15 +44,16 @@ function SignIn() {
         }
     }
 
+
     const signInWithGoogle = async () => {
         try {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            const userCredential = await firebase.auth().signInWithPopup(provider);
-            setUser(userCredential.user);
+          const provider = new GoogleAuthProvider();
+          const userCredential = await signInWithPopup(auth, provider);
+          setUser(userCredential.user);
         } catch (err) {
-            setError(err.message);
+          setError(err.message);
         }
-    }
+      };
 
     const signOut = async (e) => {
         e.preventDefault();
@@ -86,8 +86,8 @@ function SignIn() {
                     <button type="submit" onClick={signIn}>Sign In</button>
                 </form>
 
-                <div> 
-                    
+                <div onClick={signInWithGoogle}> 
+                    <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google Logo" />
                 </div>
             </div>
         )}
