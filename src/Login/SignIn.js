@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
+import GoogleLogo from './Logos/GoogleLogo';
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -87,7 +88,7 @@ function SignIn() {
                 </form>
 
                 <div onClick={signInWithGoogle}> 
-                    <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google Logo" />
+                    <GoogleLogo />
                 </div>
             </div>
         )}
