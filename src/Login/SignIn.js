@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import GoogleLogo from './Logos/GoogleLogo';
+import FacebookLogo from './Logos/FacebookLogo';
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -56,6 +57,15 @@ function SignIn() {
         }
       };
 
+    
+    const signInWithFacebook = async () => {
+        try {
+        
+        } catch (err) {
+          setError(err.message);
+        }
+    }
+
     const signOut = async (e) => {
         e.preventDefault();
 
@@ -89,6 +99,10 @@ function SignIn() {
 
                 <div onClick={signInWithGoogle}> 
                     <GoogleLogo />
+                </div>
+
+                <div onClick={signInWithFacebook}> 
+                    <FacebookLogo />
                 </div>
             </div>
         )}
