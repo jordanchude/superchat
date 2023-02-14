@@ -61,6 +61,10 @@ function SignIn() {
 
     
     const signInWithFacebook = async () => {
+        // FB.getLoginStatus(function(response) { 
+        //     statusChangeCallback(response);
+        // });
+
         FB.login(function(response) {
             try {
                 if (response.authResponse) {
@@ -70,7 +74,7 @@ function SignIn() {
                         setUser(response);
                     });
                     } else {
-                    // User is not logged in
+                    console.log("user is not logged in")
                 }
             } catch (err) {
                 setError(err.message);
