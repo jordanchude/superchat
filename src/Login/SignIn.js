@@ -3,6 +3,7 @@ import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopu
 import { initializeApp } from 'firebase/app';
 import GoogleLogo from './Logos/GoogleLogo';
 import FacebookLogo from './Logos/FacebookLogo';
+const FB = window.FB;
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -43,6 +44,7 @@ function SignIn() {
             setUser(userCredential.user);
         } catch (err) {
             setError(err.message)
+            console.log(error)
         }
     }
 
@@ -59,11 +61,21 @@ function SignIn() {
 
     
     const signInWithFacebook = async () => {
-        try {
-        
-        } catch (err) {
-          setError(err.message);
-        }
+        FB.login(function(response) {
+            try {
+                if (response.authResponse) {
+                    // User is logged in
+                        FB.api('/me', function(response) {
+                        console.log('Good to see you, ' + response.name + '.');
+                        setUser(response);
+                    });
+                    } else {
+                    // User is not logged in
+                }
+            } catch (err) {
+                setError(err.message);
+            }
+          });
     }
 
     const signOut = async (e) => {
