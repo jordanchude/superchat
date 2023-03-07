@@ -35,6 +35,11 @@ function SignIn() {
     const handleUserChange = (user) => {
         setUser(user);
     }
+
+    const handleInputChange = (e) => {
+        handleUserChange(e);
+        handlePasswordChange(e);
+    }
     
     const signIn = async (e) => {
         e.preventDefault();
@@ -61,12 +66,8 @@ function SignIn() {
 
     
     const signInWithFacebook = async () => {
-        // FB.getLoginStatus(function(response) { 
-        //     statusChangeCallback(response);
-        // });
-
-        FB.login(function(response) {
-            try {
+        try {
+            FB.login(function(response) {
                 if (response.authResponse) {
                     // User is logged in
                         FB.api('/me', function(response) {
@@ -76,10 +77,10 @@ function SignIn() {
                     } else {
                     console.log("user is not logged in")
                 }
-            } catch (err) {
-                setError(err.message);
-            }
           });
+        } catch (err) {
+            setError(err.message);
+        }
     }
 
     const signOut = async (e) => {
@@ -109,7 +110,7 @@ function SignIn() {
             <div>
                 <form onKeyDown={handleKeyDown}>
                     <input type="email" placeholder="email" onChange={handleEmailChange}/>
-                    <input type="password" placeholder="password" onChange={handlePasswordChange} onUserChange={handleUserChange}/>
+                    <input type="password" placeholder="password" onChange={handleInputChange}/>
                     <button type="submit" onClick={signIn}>Sign In</button>
                 </form>
 
