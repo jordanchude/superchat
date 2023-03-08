@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import GoogleLogo from './Logos/GoogleLogo';
 import FacebookLogo from './Logos/FacebookLogo';
@@ -37,9 +37,13 @@ function SignIn() {
     }
 
     const handleInputChange = (e) => {
-        handleUserChange(e);
-        handlePasswordChange(e);
-    }
+        if (e.target.name === "email") {
+          setEmail(e.target.value);
+        } else if (e.target.name === "password") {
+          setPassword(e.target.value);
+        }
+      };
+      
     
     const signIn = async (e) => {
         e.preventDefault();
@@ -53,6 +57,19 @@ function SignIn() {
         }
     }
 
+    const signInWithCredential = async (auth, credential) => {
+        try {
+          // Use the signInWithCredential method of the Firebase Authentication SDK to sign in the user with the given credential
+          const userCredential = await signInWithCredential(auth, credential);
+          // Set the signed-in user in state
+          setUser(userCredential.user);
+        } catch (err) {
+          // Set the error in state if there is one
+          setError(err.message);
+        }
+      };
+      
+  
 
     const signInWithGoogle = async () => {
         try {
@@ -63,25 +80,32 @@ function SignIn() {
           setError(err.message);
         }
       };
-
+      
     
-    const signInWithFacebook = async () => {
+      const signInWithFacebook = async () => {
         try {
-            FB.login(function(response) {
+          FB.getLoginStatus(function(response) {
+            if (response.status === 'connected') {
+              // User is already logged in
+              const credential = FacebookAuthProvider.credential(response.authResponse.accessToken);
+              signInWithCredential(auth, credential);
+            } else {
+              // User is not logged in, show Facebook login dialog
+              FB.login(function(response) {
                 if (response.authResponse) {
-                    // User is logged in
-                        FB.api('/me', function(response) {
-                        console.log('Good to see you, ' + response.name + '.');
-                        setUser(response);
-                    });
-                    } else {
-                    console.log("user is not logged in")
+                  const credential = FacebookAuthProvider.credential(response.authResponse.accessToken);
+                  signInWithCredential(auth, credential);
+                } else {
+                  setError('Facebook login failed');
                 }
+              });
+            }
           });
         } catch (err) {
-            setError(err.message);
+          setError(err.message);
         }
-    }
+      };
+      
 
     const signOut = async (e) => {
         e.preventDefault();
