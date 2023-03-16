@@ -3,7 +3,6 @@ import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopu
 import { initializeApp } from 'firebase/app';
 import GoogleLogo from './Logos/GoogleLogo';
 import FacebookLogo from './Logos/FacebookLogo';
-const FB = window.FB;
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -62,33 +61,31 @@ function SignIn() {
       
     
       const signInWithFacebook = async () => {
-        try {
-          if (typeof FB !== "undefined") {
-            FB.getLoginStatus(function(response) {
-              if (response.status === 'connected') {
-                // User is already logged in
-                const credential = FacebookAuthProvider.credential(response.authResponse.accessToken);
-                signInWithCredential(auth, credential);
-                setUser(credential.user)
-              } else {
-                // User is not logged in, show Facebook login dialog
-                FB.login(function(response) {
-                  if (response.authResponse) {
-                    const credential = FacebookAuthProvider.credential(response.authResponse.accessToken);
-                    signInWithCredential(auth, credential);
-                  } else {
-                    setError('Facebook login failed');
-                  }
-                });
-              }
-            });
-          } else {
-            setError('Facebook SDK not loaded');
-            console.log('Facebook SDK not loaded')
-          }
-        } catch (err) {
-          setError(err.message);
-        }
+        const provider = new FacebookAuthProvider();
+        const auth = getAuth();
+        signInWithPopup(auth, provider)
+          .then((result) => {
+            // The signed-in user info.
+            const user = result.user;
+            setUser(user);
+            // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+            const credential = FacebookAuthProvider.credentialFromResult(result);
+            const accessToken = credential.accessToken;
+
+            // IdP data available using getAdditionalUserInfo(result)
+            // ...
+          })
+          .catch((error) => {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // The email of the user's account used.
+            const email = error.customData.email;
+            // The AuthCredential type that was used.
+            const credential = FacebookAuthProvider.credentialFromError(error);
+
+    // ...
+  });
       };
       
       
