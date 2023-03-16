@@ -63,28 +63,34 @@ function SignIn() {
     
       const signInWithFacebook = async () => {
         try {
-          FB.getLoginStatus(function(response) {
-            if (response.status === 'connected') {
-              // User is already logged in
-              const credential = FacebookAuthProvider.credential(response.authResponse.accessToken);
-              signInWithCredential(auth, credential);
-              setUser(credential.user)
-            } else {
-              // User is not logged in, show Facebook login dialog
-              FB.login(function(response) {
-                if (response.authResponse) {
-                  const credential = FacebookAuthProvider.credential(response.authResponse.accessToken);
-                  signInWithCredential(auth, credential);
-                } else {
-                  setError('Facebook login failed');
-                }
-              });
-            }
-          });
+          if (typeof FB !== "undefined") {
+            FB.getLoginStatus(function(response) {
+              if (response.status === 'connected') {
+                // User is already logged in
+                const credential = FacebookAuthProvider.credential(response.authResponse.accessToken);
+                signInWithCredential(auth, credential);
+                setUser(credential.user)
+              } else {
+                // User is not logged in, show Facebook login dialog
+                FB.login(function(response) {
+                  if (response.authResponse) {
+                    const credential = FacebookAuthProvider.credential(response.authResponse.accessToken);
+                    signInWithCredential(auth, credential);
+                  } else {
+                    setError('Facebook login failed');
+                  }
+                });
+              }
+            });
+          } else {
+            setError('Facebook SDK not loaded');
+            console.log('Facebook SDK not loaded')
+          }
         } catch (err) {
           setError(err.message);
         }
       };
+      
       
       
 

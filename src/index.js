@@ -4,8 +4,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+
+import { initializeFacebookSDK } from './facebookInit';
 import { initializeApp } from 'firebase/app';
 // import { getAnalytics } from "firebase/analytics";
+
+initializeFacebookSDK();
 
 export const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
