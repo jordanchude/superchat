@@ -4,6 +4,7 @@ import { initializeApp } from 'firebase/app';
 import GoogleLogo from '../Logos/GoogleLogo';
 import FacebookLogo from '../Logos/FacebookLogo';
 import SuperchatLogo from '../Logos/SuperchatLogo';
+import PeopleDancing from '../Logos/PeopleDancing';
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -113,6 +114,9 @@ function SignIn() {
         <div>
         <div>
             <SuperchatLogo />
+        </div>
+        <div>
+          <PeopleDancing />
         </div>
         {user ? (
             <div>
