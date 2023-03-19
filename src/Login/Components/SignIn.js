@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider, signInWithCredential } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
-import GoogleLogo from './Logos/GoogleLogo';
-import FacebookLogo from './Logos/FacebookLogo';
+import GoogleLogo from '../Logos/GoogleLogo';
+import FacebookLogo from '../Logos/FacebookLogo';
+import SuperchatLogo from '../Logos/SuperchatLogo';
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -110,6 +111,9 @@ function SignIn() {
 
     return (
         <div>
+        <div>
+            <SuperchatLogo />
+        </div>
         {user ? (
             <div>
                 <button type="submit" onClick={signOut}>Sign Out</button>
