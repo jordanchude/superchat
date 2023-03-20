@@ -1,8 +1,9 @@
 import React from 'react';
+import '../Styles/SuperchatLogo.css';
 
 const SuperchatLogo = () => {
     return (
-        <img src={process.env.PUBLIC_URL + '/superchat-logo.svg'} alt="superchat logo"/>
+        <img id="logo" src={process.env.PUBLIC_URL + '/superchat-logo.svg'} alt="superchat logo"/>
     );
 };
 

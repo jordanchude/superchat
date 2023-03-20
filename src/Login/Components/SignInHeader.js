@@ -1,5 +1,6 @@
 import React from 'react';
 import SuperchatLogo from '../Logos/SuperchatLogo';
+import '../Styles/SignInHeader.css';
 
 const SignInHeader = () => {
     return (
