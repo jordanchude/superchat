@@ -132,6 +132,13 @@ function SignIn() {
                     <input type="password" placeholder="password" onChange={handleInputChange}/>
                     <button type="submit" onClick={signIn}>Sign In</button>
                 </form>
+                <div>
+                  <input type="checkbox" id="rememberMe" name="rememberMe"></input><label>Remember Me?</label>
+                  <p>Forgot password?</p>
+                </div>
+                <div>
+                  <button>Sign In</button>
+                </div>
 
                 <div onClick={signInWithGoogle}> 
                     <GoogleLogo />
