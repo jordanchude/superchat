@@ -3,8 +3,8 @@ import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopu
 import { initializeApp } from 'firebase/app';
 import GoogleLogo from '../Logos/GoogleLogo';
 import FacebookLogo from '../Logos/FacebookLogo';
-import SuperchatLogo from '../Logos/SuperchatLogo';
 import PeopleDancing from '../Logos/PeopleDancing';
+import SignInHeader from './SignInHeader';
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -113,7 +113,7 @@ function SignIn() {
     return (
         <div>
         <div>
-            <SuperchatLogo />
+            <SignInHeader />
         </div>
         <div>
           <PeopleDancing />
@@ -124,6 +124,9 @@ function SignIn() {
             </div>
         ) : (
             <div>
+                <div>
+                  <h1>Sign In</h1>
+                </div>
                 <form onKeyDown={handleKeyDown}>
                     <input type="email" placeholder="email" onChange={handleEmailChange}/>
                     <input type="password" placeholder="password" onChange={handleInputChange}/>
