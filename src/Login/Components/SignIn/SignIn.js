@@ -6,6 +6,9 @@ import FacebookLogo from '/Users/jordan/Documents/Code/projects/superchat/src/Lo
 import PeopleDancing from '/Users/jordan/Documents/Code/projects/superchat/src/Login/Logos/PeopleDancing.js';
 import SignInHeader from './SignInHeader';
 
+// Styles
+import '/Users/jordan/Documents/Code/projects/superchat/src/Login/Styles/SignIn/SignIn.css';
+
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
     authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -111,45 +114,49 @@ function SignIn() {
     }
 
     return (
-        <div>
-        <div>
-            <SignInHeader />
-        </div>
-        <div>
-          <PeopleDancing />
-        </div>
-        {user ? (
+        <div class="container">
+          <div class="left-side">
             <div>
-                <button type="submit" onClick={signOut}>Sign Out</button>
+                <SignInHeader />
             </div>
-        ) : (
-            <div>
+            {user ? (
                 <div>
-                  <h1>Sign In</h1>
+                    <button type="submit" onClick={signOut}>Sign Out</button>
                 </div>
-                <form onKeyDown={handleKeyDown}>
-                    <input type="email" placeholder="email" onChange={handleEmailChange}/>
-                    <input type="password" placeholder="password" onChange={handleInputChange}/>
-                    <button type="submit" onClick={signIn}>Sign In</button>
-                </form>
+            ) : (
                 <div>
-                  <input type="checkbox" id="rememberMe" name="rememberMe"></input><label>Remember Me?</label>
-                  <p>Forgot password?</p>
-                </div>
-                <div>
-                  <button>Sign In</button>
-                </div>
+                    <div>
+                      <h1>Sign In</h1>
+                    </div>
+                    <form onKeyDown={handleKeyDown}>
+                        <input type="email" placeholder="email" onChange={handleEmailChange}/>
+                        <input type="password" placeholder="password" onChange={handleInputChange}/>
+                        <button type="submit" onClick={signIn}>Sign In</button>
+                    </form>
+                    <div>
+                      <input type="checkbox" id="rememberMe" name="rememberMe"></input><label>Remember Me?</label>
+                      <p>Forgot password?</p>
+                    </div>
+                    <div>
+                      <button>Sign In</button>
+                    </div>
 
-                <div onClick={signInWithGoogle}> 
-                    <GoogleLogo />
-                </div>
+                    <div onClick={signInWithGoogle}> 
+                        <GoogleLogo />
+                    </div>
 
-                <div onClick={signInWithFacebook}> 
-                    <FacebookLogo />
+                    <div onClick={signInWithFacebook}> 
+                        <FacebookLogo />
+                    </div>
                 </div>
+            )}
             </div>
-        )}
-        </div>
+            <div class="right-side">
+              <div class="image">
+                <PeopleDancing />
+              </div>
+            </div>
+          </div>
     );
 }
 
