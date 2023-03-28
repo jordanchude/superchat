@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider, signInWithCredential } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
-import GoogleLogo from '../Logos/GoogleLogo';
-import FacebookLogo from '../Logos/FacebookLogo';
-import PeopleDancing from '../Logos/PeopleDancing';
+import GoogleLogo from '/Users/jordan/Documents/Code/projects/superchat/src/Login/Logos/GoogleLogo.js';
+import FacebookLogo from '/Users/jordan/Documents/Code/projects/superchat/src/Login/Logos/FacebookLogo.js';
+import PeopleDancing from '/Users/jordan/Documents/Code/projects/superchat/src/Login/Logos/PeopleDancing.js';
 import SignInHeader from './SignInHeader';
 
 const firebaseConfig = {

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Styles/SuperchatLogo.css';
+import '/Users/jordan/Documents/Code/projects/superchat/src/Login/Styles/SignIn/SuperchatLogo.css';
 
 const SuperchatLogo = () => {
     return (

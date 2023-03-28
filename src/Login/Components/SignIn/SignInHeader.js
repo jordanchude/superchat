@@ -1,6 +1,6 @@
 import React from 'react';
-import SuperchatLogo from '../Logos/SuperchatLogo';
-import '../Styles/SignInHeader.css';
+import SuperchatLogo from '/Users/jordan/Documents/Code/projects/superchat/src/Login/Logos/SuperchatLogo.js';
+import '/Users/jordan/Documents/Code/projects/superchat/src/Login/Styles/SignIn/SignInHeader.css';
 
 const SignInHeader = () => {
     return (
