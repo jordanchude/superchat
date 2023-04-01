@@ -6,6 +6,11 @@
 
 .left-side {
     flex: 1 1 50%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .right-side {
@@ -59,9 +64,9 @@
   }
 
 
-.sign-in-container {
+/* .sign-in-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-}
+} */
