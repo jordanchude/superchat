@@ -124,7 +124,7 @@ function SignIn() {
                     <button type="submit" onClick={signOut}>Sign Out</button>
                 </div>
             ) : (
-                <div>
+                <div class="sign-in-container">
                     <div>
                       <h1>Sign In</h1>
                     </div>
@@ -141,11 +141,11 @@ function SignIn() {
                       <button>Sign In</button>
                     </div>
 
-                    <div onClick={signInWithGoogle}> 
+                    <div class="button" onClick={signInWithGoogle}> 
                         <GoogleLogo />
                     </div>
 
-                    <div onClick={signInWithFacebook}> 
+                    <div class="button" onClick={signInWithFacebook}> 
                         <FacebookLogo />
                     </div>
                 </div>

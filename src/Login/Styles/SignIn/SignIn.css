@@ -21,4 +21,47 @@
 .image {
     width: 412px; 
     height: 386px;
+}
+
+.button {
+  width: 81px; 
+  height: 36px; 
+  padding: 0 10px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  color: #C71610FF; 
+  background: #FEF1F1FF; 
+  opacity: 1; 
+  border: none; 
+  border-radius: 18px; 
+  gap: 0px; 
+}
+
+.button .icon {
+    width: 16px; 
+    height: 16px; 
+    fill: #C71610FF; 
   }
+  /* Hover */
+  .button:hover {
+    color: #C71610FF; 
+    background: #FBD2D0FF; 
+  }
+  /* Pressed */
+  .button:hover:active {
+    color: #C71610FF; 
+    background: #F9B2B0FF; 
+  }
+  /* Disabled */
+  .button:disabled {
+    opacity: 0.4; 
+  }
+
+
+.sign-in-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
